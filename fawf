@@ -1,0 +1,1335 @@
+1. Explain architecture of SSIS?
+SSIS architecture consists of four key parts:
+a) Integration Services service: monitors running Integration Services packages and manages the storage of packages.
+b) Integration Services object model: includes managed API for accessing Integration Services tools, command-line utilities, and custom applications.
+c) Integration Services runtime and run-time executables: it saves the layout of packages, runs packages, and provides support for logging, breakpoints, configuration, connections, and transactions. The Integration Services run-time executables are the package, containers, tasks, and event handlers that Integration Services includes, and custom tasks.
+d) Data flow engine: provides the in-memory buffers that move data from source to destination.
+
+     2.    What is SSIS? How it related with SQL Server.
+SQL Server Integration Services (SSIS) is a component of SQL Server which can be used to perform a wide range of Data Migration and ETL operations. SSIS is a component in MSBI process of SQL Server.
+This is a platform for Integration and Workflow applications. It is known for a fast and flexible OLTP and OLAP extensions used for data extraction, transformation, and loading (ETL). The tool may also be used to automate maintenance of SQL Server databases and multidimensional data sets.
+
+3.       What are the differences between DTS and SSIS ?
+Data Transformation Services                     SQL Server Integration Services
+Limited Error Handling                                   Complex and powerful Error Handling
+Message Boxes in ActiveX Scripts                             Message Boxes in .NET Scripting
+No Deployment Wizard                                 Interactive Deployment Wizard
+Limited Set of Transformation                    Good number of Transformations
+NO BI functionality                                                          Complete BI Integration
+
+4.       What is a workflow in SSIS ?
+Workflow is a set of instructions on to specify the Program Executor on how to execute tasks and containers within SSIS Packages.
+
+5.       Which SSIS versions You have worked on?
+Differences between 2005 and 2008 are not very big so 2005, 2008 or 2008 R2 experience usually is very similar. The big difference is with 2000 which had DTS and it very different (SSIS is created from scratch)
+
+6.       Have you used or what do you mean by SSIS Framework?
+This is common term in SSIS world which just means that you have templates that are set up to perform routine tasks like logging, error handling etc. Yes answer would usually indicate experienced person, no answer is still fine if your project is not very mission critical.
+7.       How have you attended any training SSIS.
+The thing is that most people who read good books have usually an advantage over those who hasn't because they know what they know and they know what they don't know (but they know it exists and is available)…. Blog/Articles very in quality so best practice articles is a big plus+, conferences can be also a plus.
+
+8.       SSIS certifications?
+Comment: This is rather disappointing point for me. Qualifications generally are welcome but unfortunately many people simply cheat. Companies run courses and then give questions and answers, or people find them on the internet. I've met people who had certification but knew very little, I've met people very experienced and knowledgeable without certification and people who have done certification for their self-satisfaction and are experienced and knowledgeable. In other words be careful with certification…. It is easy to get a misleading impression so make sure you ask the best questions for the position you can.
+
+9.       I am going to build the package what are the steps we have to do first?
+
+
+
+10.   Staging area?
+It is a temporary data storage location. Where various data T/R activities take place. A staging area is a kitchen of data warehouse.
+
+11.   Where do you get the data from?
+
+12.   Import & export wizard?
+a) Easiest method to move data from sources like oracle, db2, sql server.
+Right click on database name->goto task->import and export wizard
+Select the source
+Select the destination
+Query copy of tables
+Execute
+Finish
+
+13. What are new features in SSIS 2008?
+Ans: With the release of SQL SERVER 2008 comes improved SSIS 2008.
+1) Improved Parallelism of Execution Trees:
+The biggest performance improvement in the SSIS 2008 is incorporation of parallelism in the processing of execution tree. In SSIS 2005, each execution tree used a single thread whereas in SSIS 2008 , the Data flow engine is redesigned to utilize multiple threads and take advantage of dynamic scheduling to execute multiple components in parallel, including components within the same execution tree
+2) Any .NET language for Scripting:
+SSIS 2008 is incorporated with new Visual Studio Tool for Application(VSTA) scripting engine. Advantage of VSTA is it enables user to use any .NET language for scripting.
+3) New ADO.NET Source and Destination Component:
+SSIS 2008 gets a new Source and Destination Component for ADO.NET Record sets.
+4) Improved Lookup Transformation:
+In SSIS 2008, the Lookuo Transformation has faster cache loading and lookup operations. It has new caching options, including the ability for the reference dataset to use a cache file(.caw) accessed by the Cache Connectin Manager. In addition same cache can be shared between multiple Lookup Transformations.
+5) New Data Profiling Task:
+SSIS 2008 has a new debugging aid Data Profiling Task that can help user analyze the data flows occurring in the package.In many cases, execution errors are caused by unexpected variations in the data that is being transferred. The Data Profiling Task can help users to discover the cource of these errors by giving better visibility into the data flow.
+
+6) New Connections Project Wizard:
+One of the main usability enhancement to SSIS 2008 is the new Connections Project
+Wizard. The Connections Project Wizard guides user through the steps required to create source and destinations.
+
+14. What are the main component of SSIS(project-architecture)?
+SSIS archItecture has 4 main components
+1.ssis service
+2.ssis runtime engine & runtime executables
+3.ssis dataflow engine & dataflow components
+4.ssis clients
+
+15. What is SSIS Designer?
+It is a graphical tool for creating packages. It has 4 tabs: Control Flow, Data Flow, Event Handlers and Package Explorer.
+
+1.       What is a package?
+A discrete executable unit of work composed of a collection of control flow and other objects, including data sources, transformations, process sequence, and rules, errors and event handling, and data destinations.
+
+2.       What is the control flow?
+A control flow consists of one or more tasks and containers that execute when the package runs. To control order or define the conditions for running the next task or container in the package control flow, we use precedence constraints to connect the tasks and containers in a package. A subset of tasks and containers can also be grouped and run repeatedly as a unit within the package control flow. SQL Server 2005 Integration Services (SSIS) provides three different types of control flow elements: Containers that provide structures in packages, Tasks that provide functionality, and Precedence Constraints that connect the executables, containers, and tasks into an ordered control flow.
+
+3.       What is a data flow?
+A data flow consists of the sources and destinations that extract and load data, the transformations that modify and extend data, and the paths that link sources, transformations, and destinations The Data Flow task is the executable within the SSIS package that creates, orders, and runs the data flow. A separate instance of the data flow engine is opened for each Data Flow task in a package. Data Sources, Transformations, and Data Destinations are the three important categories in the Data Flow
+
+4.       WHAT'S THE DIFFERENCE BETWEEN CONTROL FLOW AND DATA FLOW?
+Control Flow:
+1.       Process Oriented
+2.       Doesn’t manage or pass data between components.
+3.       It functions as a task coordinator
+4.       In control flow tasks requires completion (Success, failure or completion)
+5.       Synchronous in nature, this means, task requires completion before moving to next task. If the tasks are not connected with each other but still they are synchronous in nature.
+6.       Tasks can be executed both parallel and serially
+7.       Three types of control flow elements in SSIS 2005
+•         Containers: Provides structures in the packages
+•         Tasks: Provides functionality in the packages
+•         Precedence Constraints: Connects containers, executables and tasks into an ordered control flow.
+8.       We can control the sequence execution for tasks and also specify the conditions that tasks and containers run.
+9.       It is possible to include nested containers as SSIS Architecture supports nesting of the containers. Control flow can include multiple levels of nested containers.
+Data Flow
+
+1.            Streaming in nature
+2.            Information oriented
+3.            Passes data between other components
+4.            Transformations work together to manage and process data. This means first set of data from the source may be in the final destination step while at the same time other set of data is still flowing. All the transformations are doing work at the same time.
+5.            Three types of Data Flow components
+ Sources: Extracts data from the various sources (Database, Text Files etc)
+•                     Transformations: Cleans, modify, merge and summarizes the data
+                       Destination: Loads data into destinations like database, files or in memory datasets
+
+5.       What are the different types of data sources available in SSIS?
+There are 7 types of data sources provided by SSIS: a.) Data Reader source b.) Excel source c.) Flat file source d.) OLEDB source e.) Raw file source f.) XML source g.) Script component
+
+6.       What is the function of Event handlers tab in SSIS?
+On the Event handlers tab, workflows can be configured to respond to package events.
+For example, we can configure Work Flow when ANY task Failes or Stops or Starts ..
+
+7.       What is the function of Package explorer tab in SSIS?
+This tab provides an explorer view of the package. You can see what is happening in the package. The Package is a container at the top of the hierarchy.
+
+8.       What is Solution Explorer?
+It is a place in SSIS Designer where all the projects, Data Sources, Data Source Views and other miscellaneous files can be viewed and accessed for modification
+
+9.       What are Connection Managers?
+It is a bridge b/w package object and physical data. It provides logical representation of a connection at design time the properties of the connection mgr describes the physical connection that integration services creates when the package is run.
+
+10.   Explain ODBC Connection manager?
+How do you create connection manager for flat file?
+
+11.   Difference between 32 bit and 64 bit in ssis?
+
+12.   How Many connection Managers would be there If I am fetching record from 10 different excel ?
+
+13.   How Many connection Managers would be there if I am fetching records from 2 Different tables of same database?
+
+14.   How to configure Dynamic connection strings in SSIS Package? Take some scenario and explain?
+
+
+15.   Explain use of Expression builder?
+The Expression Builder dialog box provides several tools to help you create your expressions:
+•             The upper-left window lists the system and user-defined variables that can be used in your expressions.
+•             The upper-right window lists the functions and operators that you can include in your expressions.
+•             The Expression window provides a workspace for creating your expressions. You can drag variables, functions, and operators from the two upper windows into the workspace.
+•             The Evaluate Expression button launches the logic necessary to evaluate the expression in the Expression window. If the expression can be evaluated, the results of that evaluation are displayed in the Evaluated value window. If the expression cannot be evaluated, a message window appears and displays details about the expression. Sometimes the message is useful in determining why your expression could not be evaluated
+
+31. Can you name 5 or more of the native SSIS connection managers?
+1) OLEDB connection – Used to connect to any data source requiring an OLEDB connection (i.e.,
+SQL Server 2000)
+2) Flat file connection – Used to make a connection to a single file in the File System. Required for reading information from a File System flat file
+3) ADO.Net connection – Uses the .Net Provider to make a connection to SQL Server 2005 or other
+connection exposed through managed code (like C#) in a custom task
+4) Analysis Services connection – Used to make a connection to an Analysis Services database or project. Required for the Analysis Services DDL Task and Analysis Services Processing Task
+5) File connection – Used to reference a file or folder. The options are to either use or create a file or folder
+6) Excel
+
+32. What are variables and what is variable scope ?
+Variables store values that a SSIS package and its containers, tasks, and event handlers can use at run time. The scripts in the Script task and the Script component can also use variables. The precedence constraints that sequence tasks and containers into a workflow can use variables when their constraint definitions include expressions. Integration Services supports two types of variables: user-defined variables and system variables. User-defined variables are defined by package developers, and system variables are defined by Integration Services. You can create as many user-defined variables as a package requires, but you cannot create additional system variables.
+
+33. How many types of variable scopes?
+               
+34. How would you pass a variable value to Child Package?
+
+35. How can we pass one package variable to another package variable?
+
+36. Can you name some of the core SSIS components in the Business Intelligence Development Studio you work with on a regular basis when building an SSIS package?
+Connection Managers
+Control Flow
+Data Flow
+Event Handlers
+Variables window
+Toolbox window
+Output window
+Logging
+Package Configurations
+
+37. Can you name 5 or more of the main SSIS tool box widgets and their functionality?
+For Loop Container
+Foreach Loop Container
+Sequence Container
+ActiveX Script Task
+Analysis Services Execute DDL Task
+Analysis Services Processing Task
+Bulk Insert Task
+Data Flow Task
+Data Mining Query Task
+Execute DTS 2000 Package Task
+Execute Package Task
+Execute Process Task
+Execute SQL Task
+etc.
+
+38. How to unzip a File in SSIS?
+ The following is the process for Unzip a file in SSIS.
+
+- Use Execute Process Task in the Control Flow Task.
+- From BIDS, drag and drop an Execute Process Task to the control flow and configure.
+
+In the Execute Process, perform the following configurations:
+
+- Executable: The path of the application that is being used.
+- Arguments: Need to supply the arguments to extract the zipped files. –o+ is the default parameter for overwriting files if they exist.
+- Working Directory: The current directory for all process.
+
+
+
+39. How many difference source and destinations have you used?
+It is very common to get all kinds of sources so the more the person worked with the better for you. Common ones are SQL Server, CSV/TXT, Flat Files, Excel, Access, Oracle, MySQL but also Sales force, web data scrapping.
+
+40. Isolation levels in ssis?
+
+41. What are isolations in SSIS, and where u can use this?
+
+42. Transaction support features in ssis?
+
+43. SSIS Blocking and Non blocking transformation.
+Data flow transformations in SSIS use memory/buffers in different ways.  The way a transformation uses memory can dramatically impact the performance of your package.  Transformation buffer usage can be classified into 3 categories: Non Blocking, Partially Blocking, and (Full) Blocking.
+
+If you picture a data flow as a river, and transformation buffer usage as a dam in that river, here is the impact of your transformation on your data flow. 
+
+•             A Non Blocking transformation is a dam that just lets the water spill over the top.  Other than perhaps a bit of a slow down the water (your data) proceeds on its way with very little delay
+•             A Partially Blocking transformation is a dam that holds the water back until it reaches a certain volume , and then releases that volume of water downstream and then completely blocks the flow until that volume is achieved again.  Your data in this case, will stop, then start, then stop, then start over and over until all the data has moved through the transformation.  The downstream transformations end up starved for data during certain periods, and then flooded with data during other periods.  Clearly your downstream transformations will not be able to work as efficiently when this happens, and your entire package will slow down as a result.
+•             A Blocking transformation is a dam that lets nothing through until the entire volume of the river has flowed into the dam.  Nothing is left to flow from upstream, and nothing has been passed downstream.  Then once the transformation is finished, it releases all the data downstream.  Clearly for a large dataset this can be extremely memory intensive.  Additionally, if all the transforms in your package are just waiting for data, your package is going to run much more slowly.
+Generally speaking if you can avoid Blocking and Partially Blocking transactions, your package will simply perform better.  If you think about it a bit, you will probably be able to figure out which transformations fall into which category.  Here is a quick list for your reference:
+
+Non Blocking
+•             Audit
+•             Character Map
+•             Conditional Split
+•             Copy Column
+•             Data Conversion
+•             Derived Column
+•             Import Column
+•             Lookup
+•             Multicast
+•             Percentage sampling
+•             Row count
+•             Row sampling
+•             Script component
+Partially Blocking
+•             Data mining
+•             Merge
+•             Merge Join
+•             Pivot/Unpivot
+•             Term Extraction
+•             Term Lookup
+•             Union All
+Blocking
+•             Aggregate
+•             Fuzzy Grouping
+•             Fuzzy Lookup
+•             Sort
+Facts :
+Sort is a fully blocking transformation.
+A Merge transform requires a Sort, but a Union All does not, use a Union All when you can.
+
+44. Difference between synchronous and asynchronous data transmission
+To understand the difference between a synchronous and an asynchronous transformation in Integration Services, it is easiest to start with an understanding of a synchronous transformation. If a synchronous transformation does not meet your needs, your design might require an asynchronous transformation.
+Synchronous Transformations: A synchronous transformation processes incoming rows and passes them on in the data flow one row at a time. Output is synchronous with input, meaning that it occurs at the same time. Therefore, to process a given row, the transformation does not need information about other rows in the data set. In the actual implementation, rows are grouped into buffers as they pass from one component to the next, but these buffers are transparent to the user, and you can assume that each row is processed separately.
+An example of a synchronous transformation is the Data Conversion transformation. For each incoming row, it converts the value in the specified column and sends the row on its way. Each discrete conversion operation is independent of all the other rows in the data set.
+In Integration Services scripting and programming, you specify a synchronous transformation by looking up the ID of a component's input and assigning it to the SynchronousInputID property of the component's outputs. This tells the data flow engine to process each row from the input and send each row automatically to the specified outputs. If you want every row to go to every output, you do not have to write any additional code to output the data. If you use the ExclusionGroupproperty to specify that rows should only go to one or another of a group of outputs, as in the Conditional Split transformation, you must call the DirectRow method to select the appropriate destination for each row. When you have an error output, you must call DirectErrorRow to send rows with problems to the error output instead of the default output.
+Asynchronous Transformations: requires an asynchronous transformation when it is not possible to process each row independently of all other rows. In other words, you cannot pass each row along in the data flow as it is processed, but instead must output data asynchronously, or at a different time, than the input. For example, the following scenarios require an asynchronous transformation:
+•             The component has to acquire multiple buffers of data before it can perform its processing. An example is the Sort transformation, where the component has to process the complete set of rows in a single operation.
+•             The component has to combine rows from multiple inputs. An example is the Merge transformation, where the component has to examine multiple rows from each input and then merge them in sorted order.
+•             There is no one-to-one correspondence between input rows and output rows. An example is the Aggregate transformation, where the component has to add a row to the output to hold the computed aggregate values.
+In Integration Services scripting and programming, you specify an asynchronous transformation by assigning a value of 0 to the Synchronous Input ID property of the component's outputs. . This tells the data flow engine not to send each row automatically to the outputs. Then you must write code to send each row explicitly to the appropriate output by adding it to the new output buffer that is created for the output of an asynchronous transformation.
+                 Note: Since a source component must also explicitly add each row that it reads from the data source to its output buffers, a source resembles a transformation with asynchronous outputs.
+It would also be possible to create an asynchronous transformation that emulates a synchronous transformation by explicitly copying each input row to the output. By using this approach, you could rename columns or convert data types or formats. However this approach degrades performance. You can achieve the same results with better performance by using built-in Integration Services components, such as Copy Column or Data Conversion.
+
+45. You may get a question stating a scenario and then asking you how would you create a package for that e.g. How would you configure a data flow task so that it can transfer data to different table based on the city name in a source table column?
+
+46. What is Execution Tree?
+Execution trees demonstrate how package uses buffers and threads. At run time, the data flow engine breaks down Data Flow task operations into execution trees. These execution trees specify how buffers and threads are allocated in the package. Each tree creates a new buffer and may execute on a different thread. When a new buffer is created such as when a partially blocking or blocking transformation is added to the pipeline, additional memory is required to handle the data transformation and each new tree may also give you an additional worker thread.
+
+47. How to Generate an Auto Incremental Number in a SSIS Package?
+SSIS package does not support any function to generate auto incremental numbers. A script component can be used for the designated task. The steps are as follows:
+
+1. Drag and drop the Script Document to the Data flow and select the Script Component Type as Transformation.
+2. Double click the Script Component.
+3. Select the column which is to pass through the script component, in the Input Columns tab.
+4. Add a column with an integer data type, in the Inputs and Outputs tab.
+
+48. What is Ignore Failure option in SSIS?
+In Ignore Failure option, the error will be ignored and the data row will be directed to continue on the next transformation. Let’s say you have some JUNK data(wrong type of data or JUNK data) flowing from source, then using this option in SSIS we can REDIRECT the junk data records to another transformation instead of FAILING the package. This helps to MOVE only valid data to destination and JUNK can be captured into separate file.
+
+49. How do you eliminate quotes from being uploaded from a flat file to SQL Server?
+This can be done using TEXT QUALIFIER property. In the SSIS package on the Flat File Connection Manager Editor, enter quotes into the Text qualifier field then preview the data to ensure the quotes are not included
+
+50. What are the delimiters in flat file?
+
+51. How will you calculate an Income Tax for all Female employees using SSIS component?
+52. Diff b/w script task & script component and its advantages.
+Script task is control flow level item where as script component is data flow level item, both of the functionalities are same. This 2 are very powerful items in SSIS.
+Normally we can implement custom code by using these components.
+By using this two items we can perform any action like DML operations on the data from DB, file and we can do any operation using c# or vb.net code we can use it as Source, destination as well. In single sentence i can conclude the usage of this items we can use to perform any ETL operation if you are good at .net.)
+53. What is a Master package.
+
+54. Have you worked with data source view in ssis.
+
+55. You can simply say ‘i never used so far
+Question Difficulty = Moderate
+Question– True or False:
+SSIS has a default Means to log all records updated, deleted or inserted on a per table basis.
+Answer: False, but a custom solution can be built to meet these needs.
+
+56. I have excel sheet I want to send good data one table and bad data to another table can you give me answer
+
+57. What are the command line tools? to execute SQL Server Integration Services packages?
+ DTSEXECUI – When this command line tool is run a user interface is loaded in order to configure each of the applicable parameters to execute an SSIS package.
+DTEXEC – This is a pure command line tool where all of the needed switches must be passed into the command for successful execution of the SSIS package.
+
+
+58. How are variables useful in ssis package?
+Variables can provide communication among objects in the package. Variables can provide communication between parent and child packages. Variables can also be used in expressions and scripts. This helps in providing dynamic values to tasks
+
+59. If we create variable in package level can we use that in task level?
+
+
+60. What are the techniques for taking care of ETL PERFORMANCE?
+One of the of the things we could do is Data Source Tuning
+Relational data sources, whether SQL Server or any other database product, rely on server optimization for peak performance. There are several SSIS features that make this process as efficient as possible, but there is only so much you can do within Integration Services to make queries run as fast as possible. Apply standard database optimization techniques, which might include:
+•             Designing tables with indexes to support sorting and query joins.
+•             Creating database objects such as views, stored procedures, and user-defined functions to encapsulate complex queries.
+•             Minimizing the use of multi-table joins, outer joins, unions, and subqueries where possible.
+•             Saving index statistics and execute queries ahead of time to cache execution plans.
+•             Using nondefault locking options to optimize queries when concurrent user access isn't required.
+To           Do This
+Set FastParse on a flat file source             Right-click the Flat File Source adapter and choose Show Advanced Editor.
+Use the Input and Output Properties tab to set properties for each of the compatible Output Columns.
+Enable FastLoad for an OLE DB destination           Open the connection manager properties and select the Advanced properties page. Set the AccessMode property to OpenRowset Using Fastload.
+Change DefaultBufferMaxRows and DefaultBufferSize In the Control Flow pane, select a data flow that you want to set. Right-click and click Properties to open the Properties pane. In the Misc category, change DefaultBufferMaxRows and DefaultBufferSize.
+Add a log event to BufferSize Tuning      Select a package you want to log. Go to the SSIS menu in Visual Studio. Select Logging and add a new log as SSIS log provider for Windows Event Log. Select the new log you create, and then choose the package and data flow you want to log. On the Details tab, in the right window, select BufferSize Tuning. Click OK. On the View menu of Visual Studio, select Event Logs under Other Windows.
+
+61. How to identify which record uploaded when in the fact table (Suppose same data uploaded with different version on the same date)  ?
+Use the auditing table table described in the audit system Question 6 to check this information.
+
+62. If I get the data from business 110 flat files, all files have same structure. I want to load all files data into a single table? Then what can I do?
+
+63. I load the 2 different flat files data into 2 different tables then how may connections are needed?
+
+64. What is the process of fine tuning a query ?
+
+65. Give example of handling data quality issues?
+ Data Quality is almost always a problem and SSIS handles it very well. Examples include importing customers from different sources where customer name can be duplicates. For instance you can have as company name: SQL Server Business Intelligence but also SQL Server BI or SQL Server BI LTD or SQL Server BI Limited or intelligence (with one l). There are different ways to handle it. Robust and time consuming is to create a table with or possible scenarios and update it after each update. You can also use fuzzy grouping which is usually easy to implement and will make usually very good decisions but it is not 100% accurate so this approach has to be justified. Other typical quality issues are nulls (missing values), outliers (dates like 2999 or types like 50000 instead of 5000 especially important if someone is adjusting the value to get bigger bonus), incorrect addresses and these are either corrected during ETL, ignored, re-directed for further manual updates or it fails the packages which for big processes is usually not practised.
+
+
+
+66. How to insert new and update existing records using SSIS?
+We often need in the incremental load of various tables (from source to destination) that old records must be updated and new records inserted.
+Step 1: Finding the columns of the source tables from which we can determine that a particular records is a new record or it is the old one.
+For e.g. I am taking a Student (Source) table. It's structure is:
+By looking at it's table structure we easily find that we can determine whether a record is old/new by the createdate and modidate.
+New record -> Createdate = Modidate
+Old Record -> Createdate <> Modidate
+
+Step 2: Create an SSIS Package
+•             Open BIDS
+•             File â€“ New Project
+•             Name - InsertUpdate
+•             Click Ok
+Step 3: Add Oledb connection for source and destination
+•             Right click on connection manager pane and select new OLE DB Connection
+•             Enter Server name or IP and then select database name
+ •            Click on Test Connection
+•             Click OK.
+ •            Repeat step (a) to step (d) to create an OLE DB connection for the destination
+Step 4: Add a dataflow task into package
+Step 5: Rename it to Student_incr
+Step 6: Add three variable of the package level scope
+Date_From : Int32,
+Date_To: Int32
+Query_Student: String
+Set the value of package variable as shown above.
+Here Query_Student variable will contain the SQL incremental query:
+"SELECT * from Student WHERE (CAST(CONVERT(VARCHAR(10), Createdate, 111) AS DATETIME) >= CAST(CONVERT(VARCHAR(10), DATEADD(Day, "+(DT_WSTR,50)@[User::Days_From]+", GETDATE()), 111) AS DATETIME)) AND (CAST(CONVERT(VARCHAR(10), Createdate, 111) AS DATETIME) < CAST(CONVERT(VARCHAR(10),DATEADD(Day, "+(DT_WSTR,50)@[User::Days_To]+", GETDATE()), 111) AS DATETIME))"
+Paste this query in the expression property of the Query_Student variable
+Step 7: Double click Student_incr dataflow task
+•             Drag and drop OLE DB Source onto the Package
+•             Right click on the OLE DB Source and then select edit
+•             Set properties as shown following:
+•             Click Ok.
+•             Drag and drop Conditional Split component onto the package
+•             Connect it to OLE DB Source and then right click on it and then select edit
+•             Make two mutually exclusive condition as shown
+•             Click ok.
+•             Drag and drop OLE DB destination and OLE DB Command components onto the package
+•             Connect OLE DB destination and OLE DB Command to Conditinal split.
+Insert -> OLE DB destination
+Update -> OLE DB Command
+•             Right click on the OLE DB destination and select Edit and then set properties
+as shown below
+•             Map the column on the mapping page and then click ok.
+•             Create a stored procedure in the destination database named
+"UpdateStudentProc" which has the following definition
+This procedure will update the existing records and will insert the new ones.
+•             Right click on OLE DB Command and then select edit
+•             In the connection manager, select localhost.destination
+•             In the Component Properties set as
+•             In the Column mappings tab map the output column to parameters of UpdateStudentProc and then click ok.
+
+67. Can you explain the SQL Server Integration Services functionality in Management Studio?
+ You have the ability to do the following:
+Login to the SQL Server Integration Services instance
+View the SSIS log
+View the packages that are currently running on that instance
+Browse the packages stored in MSDB or the file system
+Import or export packages
+Delete packages
+Run packages
+
+68. What are Business Logic Handlers?
+Business logic handlers are written in managed code and allow us to execute custom business logic during the merge synchronization. We can invoke the business logic handler in case of non-conflicting data changes. Business logic handler can perform one of the following three actions.
+•         Reject Data
+•         Accept Data
+•         Apply Custom Data
+
+
+
+69. What is Data Mining?
+Mining is “the process of extracting valid, authentic, and actionable information from large databases.” Microsoft data mining tools are different from traditional data mining applications in significant ways. Data Mining is a platform for developing intelligent applications, not a stand-alone application. You can build custom applications that are intelligent because the data mining models are easily accessible to the outside world. Further, the model is extensible so that third parties can add custom algorithms to support particular mining needs.
+
+70. What is MARS?
+Multiple Active Result Sets (MARS) is a feature that works with SQL Server to allow the execution of multiple batches on a single connection. When MARS is enabled for use with SQL Server, each command object used adds a session to the connection
+
+71. How do you do incremental load?
+Fastest way to do incremental load is by using Timestamp column in source table and then storing last ETL timestamp, In ETL process pick all the rows having Timestamp greater than the stored Timestamp so as to pick only new and updated records
+
+72. decremental loading?
+
+73. How to handle Late Arriving Dimension or Early Arriving Facts.
+Late arriving dimensions sometime get unavoidable 'coz delay or error in Dimension ETL or may be due to logic of ETL. To handle Late Arriving facts, we can create dummy Dimension with natural/business key and keep rest of the attributes as null or default.  And as soon as Actual dimension arrives, the dummy dimension is updated with Type 1 change. These are also known as Inferred Dimensions.
+
+74. How to achieve parallelism in SSIS?
+Parallelism is achieved using MaxConcurrentExecutable property of the package. Its default is -1 and is calculated as number of processors + 2.
+
+75. When to use Stored Procedures?
+This is for preparing tables (truncate), audit tasks (usually part of SSIS framework), getting configuration values for loops and a few other general tasks.
+During ETL extract you usually type simple SQL because it comes from other sources and usually over complication is not a good choice (make it dynamic) because any changes usually affect the package which has to be updated as well.
+During Transformation phase (business rules, cleaning, core work) you should use Transformation tasks not Stored procedures! There are loads of tasks that make the package much easier to develop but also a very important reason is readability which is very important for other people who need to change the package and obviously it reduces risks of making errors. Performance is usually very good with SSIS as it is memory/flow based approach. So when to use Stored Procedures for transformations? If you don't have strong SSIS developers or you have performance reasons to do it. In some cases SPs can be much faster (usually it only applies to very large datasets). Most important is have reasons which approach is better for the situation.
+
+76. What is your approach for ETL with data warehouses (how many packages you developer during typical load etc.)?
+Comment: This is rather generic question. A typical approach (for me) when building ETL is to. Have a package to extract data per source with extract specific transformations (lookups, business rules, cleaning) and loads data into staging table. Then a package do a simple merge from staging to data warehouse (Stored Procedure) or a package that takes data from staging and performs extra work before loading to data warehouse. I prefer the first one and due to this approach I occasionally consider having extract stage (as well as stage phase) which gives me more flexibility with transformation (per source) and makes it simpler to follow (not everything in one go). So to summarize you usually have package per source and one package per data warehouse table destination. There are might be other approach valid as well so ask for reasons
+Parallelism in SQL Server Integration Services
+Parallelism is a great technique to improve the performance of your data integration operations. SSIS natively supports the parallel execution of packages, tasks, and transformations. The trick to successful parallelism is to configure operations within the constraints of your system resources.
+Within SSIS, the control flow for each package is controlled by a setting called MaxConcurrentExecutables, which specifies the maximum number of SSIS threads that can execute in parallel per package. By default, this is set to -1, which translates to the number of logical machine processors plus 2.
+
+77. How to quickly load data into sql server table?
+ Fast Load option. This option is not set by default so most developers know this answer as otherwise the load is very slow.
+
+78. How do you apply business rules in SSIS (Transformations….Specific calculations but also cleansing)?
+ Some people use SSIS only to extract data and then go with stored procedures only….they are usually missing the point of the power of SSIS. Which allows to create "a flow" and on each step applies certain rules this greatly simplifies the ETL process and simplicity is very good.
+
+79. How Do You Check Data Quality in a ETL Process
+Look for evidence that the extract executed correctly. The most obvious metric is the count of rows in the extract. If there are  zero rows, abort fact table processing. Design the package to throw an error condition, unless this is a source for which zero activity is plausible. You can apply increasingly stringent tests. It’s probably not sufficient to test  for zero rows: Instead, test for whether the count of rows today is within several standard deviations of the expected daily row count. Another test is to compare row counts from the beginning and end of the transformation process to make sure you didn’t drop any rows. You may also want to sum the sales activity for the day, for comparison to an expected value. Apply these simple tests immediately after the extract and transformation steps, before loading the data into the data warehouse database.
+
+80. Can we use temp table in ssis?
+ Yes, we can use temp table in ssis.
+
+81. Buffer oriented package?
+Behind the scenes in SSIS, the data flow engine uses a buffer-oriented architecture to efficiently load and manipulate datasets in memory.  The benefit of this in-memory processing is that you do not need to physically copy and stage data at each step of the data integration.  Rather, the data flow engine manipulates data as it is transferred from source to destination.
+
+
+82. Data pipeline?
+The memory based, multithreaded, buffered t/r process flow data through an SSIS data flow task during package execution.
+
+83. How do you upgrade an SSIS Package?
+ Depending on the complexity of the package, one or two techniques are typically used:
+1) Recode the package based on the functionality in SQL Server DTS
+2) Use the Migrate DTS 2000 Package wizard in BIDS then recode any portion of the package that is not accurate
+
+84. I want to store the sql table into flat file destination what is the process?
+
+85. I want to store excel data into sql server, excel file has char data type value what will you do?
+
+86. I have one package in d(d drive) folder I want move that package in to e(e drive) folder how to move the package?
+
+87. What is parallel execution in ssis?
+
+88. What is the size of your data in flat file/oltp ?
+we do not use much flat file...only code mapping purpose we will use it max 5k and for loading into the database it will take interns of seconds only..
+
+ Want to insert a text file into database table, but during the upload want to change a column called as months – January, Feb, etc to a code, – 1,2,3.. .This code can be read from another database table called months. After the conversion of the data , upload the file. If there are any errors, write to error table. Then for all errors, read errors from database, create a file, and mail it to the supervisor.
+
+89. How would you accomplish this task in SSIS?
+
+90. What is optimizing packages?
+
+91. Where are SSIS package stored in the SQL Server?
+MSDB.sysdtspackages90 stores the actual content and ssydtscategories, sysdtslog90, sysdtspackagefolders90, sysdtspackagelog, sysdtssteplog, and sysdtstasklog do the supporting roles.
+
+92. how to achieve performance tuning in ssis and how to create dimension tables using lookup.
+Performance Tuning in ssis
+1. If you are Flat File Source try to put FastParse Option to True...In advance properties for Int,date data types
+2. Try to increse packet size in OLEDB connection....
+3. Use Fastload in destination...u will see rapid change in speed
+i didn't get what are the dimension tables excatly to create using lookup....In lookup try to use cache connection manager for better performance
+
+93. Can you name five of the Perfmon counters for SSIS and the value they provide?
+•             SQLServer:SSIS Service
+•             SSIS Package Instances
+•             SQLServer:SSIS Pipeline
+•             BLOB bytes read
+•             BLOB bytes written
+•             BLOB files in use
+•             Buffer memory
+•             Buffers in use
+•             Buffers spooled
+•             Flat buffer memory
+•             Flat buffers in use
+•             Private buffer memory
+•             Private buffers in use
+•             Rows read
+•             Rows written
+
+94. What is XML if y component?
+ It is 3rd party free component used rather frequently to output errors into XML field which saves development time
+Design an ssis package to load first half records to 1 target while other half records to a separate target.
+Delay Validation, Forced Execution         
+
+95. Explain the validations of a package at runtime?
+
+96. How to migrate Sql server 2005 Package to 2008 version
+Upgrade DTS package to SSIS
+
+97. How to track a variable in ssis?
+Execute package outside BIDS
+
+98. How are partitions done in SSIS?
+Diff ways to Execute a Package
+
+99. Microsoft office 2007 excel sheet supported by sql server 2005 or not?
+
+100. What are the different types of Transaction Options?
+
+101. Will trigger fire when inserting data through SSIS package?
+
+102. How to Concat row data through ssis?
+
+103. How do u populate 1st record to 1st target , 2nd record to 2nd  target ,3rd record to 3rd target  and 4th record to 1st target through ssis?
+
+104. I have one ssis package. How to know the how much time take for executing this package and after improving the performance how to see the time?
+
+105. I have two sources with two tables and one table is having data and another table having conditions how to use the conditions in the table?
+
+106. In my source table having 1000 records from that I want move 10 to 990 rows then what I need to do?
+
+
+
+
+
+
+
+Control Flow Elements
+
+1.       Which are the different types of Control Flow components in SSIS?
+The different types of Control Flow components are: Data Flow Tasks, SQL Server Tasks, Data Preparation Tasks, Work flow Tasks, Scripting Tasks, Analysis Services Tasks, Maintenance Tasks, Containers.
+
+2.       What are containers? What are the different types of containers in SSIS?
+Containers are objects that provide structures to packages and extra functionality to tasks. There are four types of containers in SSIS, they are: Foreach Loop Container, For Loop Container, Sequence Container and Task Host Container.
+
+3.       Types of enumerators?
+ SSIS provides 7 types of enumerators with foreach loop container.
+
+   1) Foreach File enumerator to enumerate files in a folder. The enumerator can traverse subfolders.
+   2) Foreach Item enumerator to enumerate items that are collections. For example, you can enumerate the names of executable and working directories that an Execute Process task uses.
+   3) Foreach ADO enumerator to enumerate rows in tables.
+   4) Foreach ADO.NET Schema Rowset enumerator to enumerate the schema information about a data source.
+   5) Foreach From Variable enumerator to enumerate the enumerable object that a specified variable contains, it can be an array, an ADO.NET DataTable, an Integration Services enumerator, etc.
+   6) Foreach Nodelist enumerator to enumerate the result set of an XML Path Language (XPath) expression.
+   7) Foreach SMO enumerator to enumerate SQL Server Management Objects (SMO) objects. For example, you can enumerate and get a list of the tables in a SQL Server database.
+
+4.       What are Precedence constraints?
+Constraints that link executable, container, and tasks wIthin the package control flow and specify condItion that determine the sequence and condItions for determine whether executable run.
+
+5.       Whar are the Two Categories of Control Flow tasks?
+ Control Flow Items.
+         Maintenance Plan tasks
+          6.  Task ?
+a) An individual unit of work.
+Types:-
+1. Active x script task
+2. Analysis services execute DDL task
+3. Analysis services processing task
+4. Bulk insert task *
+5. Data flow task *
+6. Data mining query task
+7. Execute Dts 2000 package task
+8. Execute package task *
+9. Execute process task
+10. Execute sql task *
+11. File system task
+12. Ftp task
+13. Message queue task
+14. Script task *
+15. Send mail task *
+16. Web service task
+17. Wmi data reader task
+18. Wmi event task
+19. Xml task
+
+7. What is the use of Bulk Insert Task in SSIS?
+Bulk Insert Task is used to upload large amount of data from flat files into Sql Server. It supports only OLE DB connections for destination database.
+
+8.What is FTP Task and how to configure it?
+
+8.       What is smtp server and what is the main purpose?
+
+9.       What is the use of Transfer SQL Server Objects Task?
+
+10.   What is Execute SQL Task?
+
+11.   FTP Task:?
+
+12.   How to configure ForEach Loop Container for each row in Execute SQL Task?
+
+13.   Where will you see if error occurs in control flow?
+
+14.   If error occurs precedence constraint stops or still runs?
+
+15.   I have one package in d(d drive) folder I want move that package in to e(e drive) folder how to move the package?
+
+
+Data Flow Transformations
+
+1.       What is transformation?Where we use it? Can you explain where you used in your project did?
+
+2.       What are the different types of Data flow components in SSIS?
+There are 3 data flow components in SSIS.
+1. Sources
+2. Transformations
+3. Destinations
+
+3.       How many transformations can be there in one dataflow task?
+
+4.        What are the Transformations available in SSIS?
+AGGEGATE  - It applies aggregate functions to Record Sets to produce new output records from aggregated values.
+AUDIT  - Adds Package and Task level Metadata - such as Machine Name, Execution Instance, Package Name, Package ID, etc..
+CHARACTER MAP - Performs SQL Server level makes string data changes such as changing data from lower case to upper case.
+CONDITIONAL SPLIT – Separates available input into separate output pipelines based on Boolean Expressions configured for each output.
+COPY COLUMN - Add a copy of column to the output we can later transform the copy keeping the original for auditing.
+DATA CONVERSION - Converts columns data types from one to another type. It stands for Explicit Column Conversion.
+DATA MINING QUERY – Used to perform data mining query against analysis services and manage Predictions Graphs and Controls.
+DERIVED COLUMN - Create a new (computed) column from given expressions.
+EXPORT COLUMN – Used to export a Image specific column from the database to a flat file.
+FUZZY GROUPING – Used for data cleansing by finding rows that are likely duplicates.
+FUZZY LOOKUP -  Used for Pattern Matching and Ranking based on fuzzy logic.
+IMPORT COLUMN - Reads image specific column from database onto a flat file.
+LOOKUP - Performs the lookup (searching) of a given reference object set against a data source. It is used for exact matches only.
+MERGE - Merges two sorted data sets into a single data set into a single data flow.
+MERGE JOIN - Merges two data sets into a single dataset using a join junction.
+MULTI CAST - Sends a copy of supplied Data Source onto multiple Destinations.
+ROW COUNT - Stores the resulting row count from the data flow / transformation into a variable.
+ROW SAMPLING - Captures sample data by using a row count of the total rows in dataflow specified by rows or percentage.
+UNION ALL - Merge multiple data sets into a single dataset.
+PIVOT – Used for Normalization of data sources to reduce analomolies by converting rows into columns
+UNPIVOT – Used for demoralizing the data structure by converts columns into rows incase of building Data Warehouses.
+
+5.       Lookup's are a key component in SQL Server Integration Services (SSIS). Explain its purpose?
+ Data from two sources is combined by Lookup Transformation. There are matching fields from these sources. Case insensitive transformations is performed by the lookups. For the purpose of accessing additional information in relation to the tables is one of the purposes of lookups. Lookups can be used in data warehousing.
+Lookups are used for the following purposes
+- Data Cleansing
+- Error Tolerance
+- Data search in data warehouse
+- Optimizations using cache modes.
+
+6.       Which join does look up transformation refer to?
+
+7.       What is Conditional Split transformation in SSIS?
+This is just like IF condition which checks for the given condition and based on the condition evaluation, the output will be sent to the appropriate OUTPUT path. It has ONE input and MANY outputs. Conditional Split transformation is used to send paths to different outputs based on some conditions. For example, we can organize the transform for the students in a class who have marks greater than 40 to one path and the students who score less than 40 to another path.
+
+8.       What is the use of Percentage Sampling transformation in SSIS?
+Percentage Sampling transformation is generally used for data mining. This transformation builds a random sample of set of output rows by choosing specified percentage of input rows. For example if the input has 1000 rows and if I specify 10 as percentage sample then the transformation returns 10% of the RANDOM records from the input data.
+
+9.       What is the use of Term Extraction transformation in SSIS?
+Term Extraction transformation is used to extract nouns or noun phrases or both noun and noun phrases only from English text. It extracts terms from text in a transformation input column and then writes the terms to a transformation output column. It can be also used to find out the content of a dataset.
+
+10.   Explain Aggregate Transformation in SSIS?
+It aggregates data, similar you do in applying TSQL functions like Group By, Min, Max, Avg, and Count. For example you get total quantity and Total line item for each product in Aggregate Transformation Editor. First you determine input columns, then output column name in Output Alias table in datagrid, and also operations for each Output Alias in Operation columns of the same datagrid. Some of operation functions listed below :
+• Group By
+• Average
+• Count
+• Count Distinct : count distinct and non null column value
+• Min, Max, Sum
+In Advanced tab, you can do some optimization here, such as setting up Key Scale option (low, medium, high), Count Distinct scale option (low, medium, high), Auto Extend factor and Warn On Division By Zero. If you check Warn On Division By Zero, the component will give warning instead of error. Key Scale option will optimize transformation cache to certain number of key threshold. If you set it low, optimization will target to 500,000 keys written to cache, medium can handle up to 5 million keys, and high can handle up to 25 million keys, or you can specify particular number of keys here. Default value is unspecified. Similar to number of keys for Count Distinct scale option. It is used to optimize number of distinct value written to memory, default value is unspecified. Auto Extend Factor is used when you want some portion of memory is used for this component. Default value is 25% of memory.
+
+11.   Explain Audit Transformation ?
+It allows you to add auditing information as required in auditing world specified by HIPPA and Sarbanes-Oxley (SOX). Auditing options that you can add to transformed data through this transformation are :
+1. Execution of Instance GUID : ID of execution instance of the package
+2. PackageID : ID of the package
+3. PackageName
+4. VersionID : GUID version of the package
+5. Execution StartTime
+6. MachineName
+7. UserName
+8. TaskName
+9. TaskID : uniqueidentifier type of the data flow task that contains audit transformation.
+
+12.   Explain Character Map Transformation?
+It transforms some character. It gives options whether output result will override the existing column or add to new column. If you define it as new column, specify new column name. Operations available here are:
+1. Uppercase
+2. Lowercase
+3. Byte reversal : such as from 0×1234 to 0×4321
+4. Full width
+5. Half width
+6. Hiragana/katakana/traditional Chinese/simplified Chinese
+7. Linguistic casing
+
+13.   Explain Copy column Transformation?
+This component simply copies a column to another new column. Just like ALIAS Column in T-Sql.
+
+
+
+14.   Explain Data conversion Transformation?
+This component does conversion data type, similar to TSQL function CAST or CONVERT. If you wish to convery the data from one type to another then this is the best bet. But please make sure that you have COMPATABLE data in the column.
+
+15.   Explain Data Mining query Transformation?
+This component does prediction on the data or fills gap on it. Some good scenarios uses this component is:
+1. Take some input columns as number of children, domestic income, and marital income to predict whether someone owns a house or not.
+2. Take prediction what a customer would buy based analysis buying pattern on their shopping cart.
+3. Filling blank data or default values when customer doesn’t fill some items in the questionnaire.
+
+16.   Explain Derived column Transformation?
+Derived column creates new column or put manipulation of several columns into new column. You can directly copy existing or create a new column using more than one column also.
+
+17.   Explain Merge Transformation?
+Merge transformation merges two paths into single path. It is useful when you want to break out data into path that handles errors after the errors are handled, the data are merge back into downstream or you want to merge 2 data sources. It is similar with Union All transformation, but Merge has some restrictions :
+1. Data should be in sorted order
+2. Data type , data length and other meta data attribute must be similar before merged.
+
+18.   Explain Merge Join Transformation?
+Merge Join transformation will merge output from 2 inputs and doing INNER or OUTER join on the data. But if you the data come from 1 OLEDB data source, it is better you join through SQL query rather than using Merge Join transformation. Merge Join is intended to join 2 different data source.
+19.   WHAT IS THE MULTICAST SHAPE USED FOR?
+The Multicast transformation distributes its input to one or more outputs. This transformation is similar to the Conditional Split transformation. Both transformations direct an input to multiple outputs. The difference between the two is that the Multicast transformation directs every row to every output, and the Conditional Split directs a row to a single output
+
+20.   Explain Percentage and row sampling Transformations?
+This transformation will take data from source and randomly sampling data. It gives you 2 outputs. First is selected data and second one is unselected data. It is used in situation where you train data mining model. These two are used to take the SAMPLE of data from the input data.
+
+21.   Explain Sort Transformation?
+This component will sort data, similar in TSQL command ORDER BY. Some transformations need sorted data.
+
+22.   Explain Union all Transformation?
+It works in opposite way to Merge transformation. It can take output from more than 2 input paths and combines into single output path.
+
+      23.  Difference between Unionall and Merge Join?
+a) Merge transformation can accept only two inputs whereas Union all can take more than two inputs
+b) Data has to be sorted before Merge Transformation whereas Union all doesn't have any condition like that.
+
+        24.Types of caches in look up?
+
+21.   Types of connection managers in look up?
+
+
+22.   What is slowly Changing Dimension?
+SCD is Slowly Changing Dimension. As the name suggests, a dimension which changes slowly.
+Type 1 (changing attribute): When the changes in any attribute or column overwrites the existing records.
+Type 2 (historical attribute): when we need to maintain the history of records, whenever some particular column value changes.
+Note :A third change tracking technique, called Type 3, keeps separate columns for both the old and new attribute values—sometimes called “alternate realities.” In our experience, Type 3 is less common because it involves changing the physical tables and is not very scalable.
+
+23.   Where did you used scd?
+
+24.   How can you configure scd?
+
+25.   What is Change Data Capture?
+Change data capture is an amazing feature in SQL Server 2008 that allows you to find changes and replicate updates, inserts and deletes to a new system.
+
+26.   Whiteboard techniques you would use to for CDC (Change Data Capture)?
+ If for some reason you’ve avoided using a whiteboard to show your ideas to this point then make sure you start on this question! For small amounts of data I may use the "Slowly Changing Dimension".
+More often than not the data is too large to use in such a slow transform. I prefer to do a lookup on the key of the target table and rows that don’t match are obviously new rows that can be inserted. If they do match it’s possible they are updates or duplicates.
+Determine this by using a conditional split comparing rows from the target to incoming rows. Send updates to a staging table that can then be updated in an Execute SQL Task.
+Explain that putting updates in a staging table instead of updating using the OLE DB Command is much better for performance because the Execute SQL Task performs a bulk operation.
+
+
+
+27.   Difference between Merge and Merge Join?
+
+28.   Diff between Fuzzy Lookup and Look up?
+
+29.   What are the most common transformations using in your project?
+
+30.   I want to update the particular record then what can I do? Take with an example?
+
+
+31.   What is the difference b/w Pivot and Unpivot Transformations?
+
+32.   I want convert lowercase letters into uppercase how do you do?
+
+33.   How to merge two names based on first two letters of the name?
+
+
+34.   How do you convert data types instead of using data conversion transformation?
+
+35.   I want convert rows into columns which transformation do you use?
+
+
+36.   Power pivot ?
+
+37.   How do we convert data type in SSIS?
+The Data Conversion Transformation in SSIS converts the data type of an input column to a different data type
+
+38.   WHAT SHAPE WOULD YOU USE TO CONCATENATE TWO INPUT FIELDS INTO A SINGLE OUTPUT FIELD?
+Derived Column shape\Task can be used to concatenate columns
+
+39.   How can you eliminate duplicates in SSIS?
+
+40.   How do you eliminate duplicates data in excel destination?
+41.   Difference between Full Cache and Partial Cache
+
+42.   I want to load the data from sql to excel file run the package how do you know how many rows are loaded in excel destination?
+
+
+
+
+
+
+
+
+Debugging, Error Handling, Logging, Breakpoints,
+Event handler, Data Viewers and security
+
+1.       What is Data Viewer and what are the different types of Data Viewers in SSIS?
+A Data Viewer allows viewing data at a point of time at runtime. If data viewer is placed before and after the Aggregate transform, we can see data flowing to the transformation at the runtime and how it looks like after the transformation occurred. The different types of data viewers are:
+1. Grid
+2. Histogram
+3. Scatter Plot
+4. Column Chart
+     2.  As per error handling in T/R, which one handle the better performance? Like fail component, redirect row or ignore failure?
+a) Redirect row provides better performance for error handling.
+
+    3. How would you do Error Handling?
+A SSIS package could mainly have two types of errors
+a) Procedure Error: Can be handled in Control flow through the precedence control and redirecting the execution flow.
+b) Data Error: is handled in DATA FLOW TASK buy redirecting the data flow using Error Output of a component
+     4. Can you explain how to setup a checkpoint file in SSIS?
+The following items need to be configured on the properties tab for SSIS package:
+CheckpointFileName – Specify the full path to the Checkpoint file that the package uses to save the value of package variables and log completed tasks. Rather than using a hard-coded path as shown above, it’s a good idea to use an expression that concatenates a path defined in a package variable and the package name.
+CheckpointUsage – Determines if/how checkpoints are used. Choose from these options: Never(default), IfExists, or Always. Never indicates that you are not using Checkpoints. IfExists is the typical setting and implements the restart at the point of failure behavior. If a Checkpoint file is found it is used to restore package variable values and restart at the point of failure. If a Checkpoint file is not found the package starts execution with the first task. The Always choice raises an error if the Checkpoint file does not exist.
+SaveCheckpoints – Choose from these options: True or False (default). You must select True to implement the Checkpoint behavior.
+
+      5.What are the different values you can set for CheckpointUsage property ?
+There are three values, which describe how a checkpoint file is used during package execution:
+1) Never: The package will not use a checkpoint file and therefore will never restart.
+2) If Exists: If a checkpoint file exists in the place you specified for the CheckpointFilename property, then it will be used, and the package will restart according to the checkpoints written.
+3) Always: The package will always use a checkpoint file to restart, and if one does not exist, the package will fail.
+
+6.       What is the ONLY Property you need to set on TASKS in order to configure CHECKPOINTS to RESTART package from failure?
+The one property you have to set on the task is FailPackageOnFailure. This must be set for each task or container that you want to be the point for a checkpoint and restart. If you do not set this property to true and the task fails, no file will be written, and the next time you invoke the package, it will start from the beginning again.
+
+
+7.       Where can we set the CHECKPOINTS, in DataFlow or ControlFlow ?
+Checkpoints only happen at the Control Flow; it is not possible to checkpoint transformations or restart inside a Data Flow. The Data Flow Task can be a checkpoint, but it is treated as any other task.
+Demonstrate or whiteboard how checkpoints work in a package.
+When checkpoints are enabled on a package if the package fails it will save the point at which the package fails.  This way you can correct the problem then rerun from the point that it failed instead of rerunning the entire package.  The obvious benefit to this is if you load a million record file just before the package fails you don’t have to load it again.
+
+8.       What is a breakpoint in SSIS? How is it setup? How do you disable it?
+Answer: A breakpoint is a stopping point in the code. The breakpoint can give the Developer\DBA an opportunity to review the status of the data, variables and the overall status of the SSIS package.
+There are 10 unique conditions exist for each breakpoint.
+Breakpoints are setup in BIDS. In BIDS, navigate to the control flow interface. Right click on the object where you want to set the breakpoint and select the ‘Edit Breakpoints…’ option.
+
+9.       How to Debug the package?
+Double-click the package in which you want to set breakpoints. In SSIS Designer, do the following: To set breakpoints in the package object, click the Control Flow tab, place the cursor anywhere on the background of the design surface, right-click, and then click Edit Breakpoints.
+
+10.   How to provide security to packages?
+
+11.    How u track the error description?
+
+12.    If the package fails, what steps u take
+
+13.   How u skip the error records?
+True or False
+Using a checkpoint file in SSIS is just like issuing the CHECKPOINT command against the relational engine. It commits all of the data to the database.
+Answer: False. SSIS provides a Checkpoint capability which allows a package to restart at the point of failure.
+
+14.   How would you restart package from previous failure point?What are Checkpoints and how can we implement in SSIS?
+When a package is configured to use checkpoints, information about package execution is written to a checkpoint file. When the failed package is rerun, the checkpoint file is used to restart the package from the point of failure. If the package runs successfully, the checkpoint file is deleted, and then re-created the next time that the package is run
+
+15.   How do you do logging in SSIS
+ SSIS includes logging features that write log entries when run-time events occur and can also write custom messages.Integration Services supports a diverse set of log providers, and gives you the ability to create custom log providers. The Integration Services log providers can write log entries to text files, SQL Server Profiler, SQL Server, Windows Event Log, or XML files.
+
+      16.  How can u handle the errors through the help of logging in SSIS?
+a) To create an on error event handler to which you add the log error execute sql task
+Logs are associated with packages and are configured at the package level. Each task or container in a package can log information to any package log. The tasks and containers in a package can be enabled for logging even if the package itself is not.
+To customize the logging of an event or custom message, Integration Services provides a schema of commonly logged information to include in log entries. The Integration Services log schema defines the information that you can log. You can select elements from the log schema for each log entry.
+To enable logging in a package:
+1). In Business Intelligence Development Studio, open the Integration Services project that contains the package you want.
+2). On the SSIS menu, click Logging.
+3). Select a log provider in the Provider type list, and then click Add.
+17. How does Error-Handling work in SSIS?
+When a data flow component applies a transformation to column data, extracts data from sources, or loads data into destinations, errors can occur. Errors frequently occur because of unexpected data values.
+Type of typical Errors in SSIS:
+-Data Connection Errors, which occur incase the connection manager cannot be initialized with the connection string. This applies to both Data Sources and Data Destinations along with Control Flows that use the Connection Strings.
+-Data Transformation Errors, which occur while data is being transformed over a Data Pipeline from Source to Destination.
+-Expression Evaluation errors, which occur if expressions that are evaluated at run time perform invalid
+
+18. How to pass property value at Run time? How do you implement Package Configuration?
+A property value like connection string for a Connection Manager can be passed to the pkg using package configurations.Package Configuration provides different options like XML File, Environment Variables, SQL Server Table, Registry Value or Parent package variable.
+Logging in ssis-types of ssis (which table is fired in ssms)-(SYSSSISLOG TABLE)
+Create SQL agent job to execute SSIS package
+I am executing a package...there is an error row, in one of the rows.
+
+19.I have one parent, child package in case the errors found child package how to handle that errors?
+
+20. How do you handle this error.
+Package failed in production...where will you look for the errors.
+
+21. Three tasks are running in your package and 2 tasks are successfully executed and third task is failed, in this situation I need to rollback 2nd and 3rd tasks, so what can u do in SSIS package and sql server?
+21. There are 10 records in a flat file source, among them 9 will be executed successfully and 10th record is failed, in this scenario I need to get all 10 records source level to target level, in target level then 10th record failure error will be displayed, what I need to do?
+
+
+
+Configuration Files, SSIS Deployment,
+Scheduling SSIS Packages and Jobs
+
+1.       What are Package Configurations? SSIS
+
+2. Can you explain different options for dynamic configurations in SSIS?
+1) XML file
+2) custom variables
+3) Database per environment with the variables
+4) Use a centralized database with all variables
+
+3.How many types of configurations?
+     XML Configuration File – Multiple values can be stored in an XML file on disk
+      Environment Variable – A single value can be stored in a Windows Environment variable
+      Registry Entry – A single value can be stored in a registry key
+      Parent Package Variable – The parent package can pass a variable to the package which         contains    the configuration value
+      SQL Server – Multiple values can be stored in a table on an SQL Server
+
+1.       What is environment variable in SSIS?
+An environment variable configuration sets a package property equal to the value in an environment variable.
+Environmental configurations are useful for configuring properties that are dependent on the computer that is executing the package.
+
+2.       If there are 100 Packages, do you create 100 configuration files or you create how many.
+The answer is based on the requirement we will create 100 config files for 100     packages.If i go for master package and if i am using same kind of connections for     the child packages like source and destinations connections then we will create less     config  files, because Master Package will pass all the connections using master-         child relation using the variables. Creation of config files is dependence of the     requirement.
+
+      6.  About multiple configurations?
+a) It means including the xml configuration, environment variable, registry entry, parent package variable, SQL Server table, and direct and indirect configuration types.
+
+       7.What configuration options have you used?
+This is an important one. Configuration should always be dynamic and usually is done using XML and/or Environment Variable and SQL Table with all configurations.
+
+8.How do you schedule ssis packages to run on the fly?
+sql server and then select the package want to schedule.
+
+1.       What is broad cast agent?
+A broadcast agent allows automation of emails to be distributed. It allows reports to be sent to different business objects. It also users to choose the report format and send via SMS, fax, pagers etc. broadcast.............
+
+
+2.       How to provide securIty to packages?
+We can provide security in two ways
+1. Package encryption
+2. Password protection.
+
+3.       What command line tools do you use with SSIS ?
+Comment: dtutil (deployment), dtexec (execution), dtexecui (generation of execution code)
+
+4.       What is the dtutil and name some of the functionality it provides?
+Utility shipped with SQL Server 2005 Integration Services to copy, rename, move, delete and\or verify an SSIS package.
+
+13. What is a logfile and how to send log file to mgr?
+a) It is especially useful when the package has been deployed to the production environment, and you can not use BIDS and VSA to debug the package.
+SSIS enables you to implement logging code through the Dts. Log method.
+When the Dts. Log method is called in the script, the SSIS engine will route the message to the log providers that are configured in the containing package.
+
+14. Command line utilities in ssis?Tell the utility to execute (run) the package?
+a) In BIDS a package that can be executed in debug mode by using the debug menu or toolbar or from solution explorer.
+In production, the package can be executed from the command line or from a Microsoft windows utility, or It can be scheduled for automated execution by using the sql server agent.
+i).go to->debug menu and select the start debugging button
+ii).press F5 key
+iii).right click the package and choose execute package.
+iv).command prompts utilities
+a).DTExecUI
+1. To open command prompt->run->type dtexecui->press enter
+2. The execute package utilIty dialog box opens.
+3. in that click execute to run the package.
+WaIt until the package has executed successfully.
+b).DTExec utilIty
+1.open the command prompt window.
+2.command prompt window->type dtexec/followed by the DTS,SQL,or file option and the package path ,including package name.
+3.if the package encryption level is encrypt sensItive wIth password or encrypt all wIth password, use the decrypt option to provide the password.
+If no password is included, dtexec will prompt you for the password.
+4. Optionally, provide addItional command-line options
+5. Press enter.
+6. Optionally, view logging and reporting information before closing the command prompt window.
+The execute package utilIty dialog box opens.
+7. In the execute package utilIty dialog box, click execute package.
+WaIt until the package has executed successfully.
+v).using sql server mgmt studio to execute package
+1. In SSMS right click a package, and then click run package.
+Execute package utilIty opens.
+2.       Execute the package as described previously.
+
+
+15.What r the possible locations to save SSIS package?
+You can save a package wherever you want.
+SQL Server
+Package Store
+File System
+
+16.   What is the difference between file system and sql server ( at the time of deployment)?
+
+17.   How to Create deployment Utility
+First step in deploying packages is to create a deployment utility for an Integration Services project. The deployment utility is a folder that contains the files you need to deploy the packages in an Integration Services project on a different server. The deployment utility is created on the computer on which the Integration Services project is stored.
+You create a package deployment utility for an Integration Services project by first configuring the build process to create a deployment utility, and then building the project. When you build the project, all packages and package configurations in the project are automatically included. To deploy additional files such as a Readme file with the project, place the files in the Miscellaneous folder of the Integration Services project. When the project is built, these files are also automatically included.
+ You can configure each project deployment differently. Before you build the project and create the package deployment utility, you can set the properties on the deployment utility to customize the way the packages in the project will be deployed. For example, you can specify whether package configurations can be updated when the project is deployed. To access the properties of an Integration Services project, right-click the project and click Properties.
+
+The following table lists the deployment utility properties.
+1. AllowConfigurationChange: A value that specifies whether configurations can be updated
+during deployment.
+2. CreateDeploymentUtility: A value that specifies whether a package deployment is created when the project is built. This property must be True to create a deployment utility.
+3. DeploymentOutputPath: The location, relative to the Integration Services project, of the deployment utility.
+When you build an Integration Services project, a manifest file, .SSISDeploymentManifest.xml, is created and added, together with copies of the project packages and package dependencies, to the bin\Deployment folder in the project, or to the location specified in the DeploymentOutputPath property. The manifest file lists the packages, the package configurations, and any miscellaneous files in the project.
+The content of the deployment folder is refreshed every time that you build the project. This means that any file saved to this folder that is not copied to the folder again by the build process will be deleted. For example, package configuration files saved to the deployment folders will be deleted.
+
+To create a package deployment utility
+
+1.            In SQL Server Data Tools (SSDT), open the solution that contains the Integration Services project for which you want to create a package deployment utility.
+2.            Right-click the project and click Properties.
+3.            In the Property Pages dialog box, click Deployment Utility.
+4.            To update package configurations when packages are deployed, set AllowConfigurationChanges to True.
+5.            Set CreateDeploymentUtility to True.
+6.            Optionally, update the location of the deployment utility by modifying the DeploymentOutputPath property.
+7.            Click OK.
+8.            In Solution Explorer, right-click the project, and then click Build.
+9.            View the build progress and build errors in the Output window
+After you’ve gone through these steps the next time you build your project it will create the file (YourProjectName).SSISDeploymentManifest. This file is located in the same folder as your packages in the bin\Deployment folder.
+If you run this file it will open the Package Installation Wizard that will allow you to deploy all your packages that were located in the project to a desired location.
+
+18.   What is Design time Deployment in SSIS ?
+When you run a package from with in BIDS,it is built and temporarily deployed to the folder. By default the package will be deployed to the BIN folder in the Package’s Project folder and you can configure for custom folder for deployment. When the Package’s execution is completed and stopped in BIDS,the deployed package will be deleted and this is called as Design Time Deployment.
+
+19.   I created one package with some file. I have diff servers having that package with diff configuration file. Is possible to execute that package in servers simultaneously?
+
+20. How would you deploy a SSIS Package on production?
+ A) Through Manifest
+1. Create deployment utility by setting its propery as true .
+2. It will be created in the bin folder of the solution as soon as package is build.
+3. Copy all the files in the utility and use manifest file to deply it on the Prod.
+B) Using DtsExec.exe utility
+C) Import Package directly in MSDB from SSMS by logging in Integration Services
+
+20.   New way of deployment in ssis 2012?
+
+       21.  How to make changes in a package after deploying  into production?
+
+22.Can we rename log file and transaction file names?
+
+23.   What is the extension of deployment?
+SSIS Development  
+Other than the components already sent to you in the excel sheet concentrate on 
+•             Control flow & Data Flow
+•             Data Quality Check – This question has already been answered above
+•             ETL Error handling
+•             Package Configuration
+•             Event Handler
+•             Handling Multiple Database with Single SSIS Package
+SSIS Deployment Process
+Deployment Options
+You can deploy packages either to the file system on the server or into the SQL Server database engine. The SQL Server deployment option writes the package content into the MSDB system database. This system database, which exists on every SQL Server, is also used to manage important system objects such as agent jobs, tasks, and backup information. The SQL Server deployment option is the most secure because everything is written to the database catalog rather than to the file system. Packages can be recovered by simply backing up and restoring the MSDB database.
+Push Deployment
+You can push a package to a server by running the Package Installation Wizard (either manually or by opening an .SSISDeploymentManifest file). You can also push a package from SQL Server to another server or to a .dtsx file from within SSMS. A convenient right-click menu option is available in SSMS to import or export a package between servers or package definition files. To push a package to another location, from Integration Services, under the File System or MSDB folder, simply right-click the package and select Export Package.
+You have the option to export a deployed package to another SQL Server or to a package file in the file system. You can use the Import Package utility to set the same configuration options as in the BIDS package designer, setting the protection level and a package password.
+Pull Deployment
+You can also deploy a package from the server in a pull scenario by importing a package within SSMS. In the Stored Packages folder, right-click the server destination (either File System or MSDB) and select Import Package to launch the Import Package utility.
+The Import Package dialog box options are nearly identical to those in the Export Package dialog box. You can import a deployed package from another SQL server or from a package file in the file system. Like the export option, you can also set the protection level and a package password.
+Managing Packages on the SSIS Server
+In the previous exercise, you deployed a package to the database server. In the next exercise, you will redeploy the package to the file system and to the MSDB database. You will execute a package from the file system and then monitor running packages.
+Import the ImportCustomers Package to the File System
+1.            In SSMS, verify that you are connected to Integration Services. If not, click the Connect button in the Object Explorer pane, select Integration Services, accept the default local server connection, and then click Connect.
+2.            Expand the Stored Packages folder, right-click File System, and choose Import Package.
+3.            Set the following properties:
+o             Package Location: File System
+o             Package Path: C:\Documents and Settings\<username>\My Documents\Microsoft Press\is2005sbs\Chap10\ImportCustomers\Mod10_Project.dtsx
+4.            Click in the Package Name text box. This sets this property to the designer package name.
+5.            Click the ellipsis button next to Protection Level. Note the value previously set in the package design. Leave this setting and click the Cancel button to close this dialog box.
+6.            Click OK.
+7.            Type the password password when prompted.
+8.            Click OK.
+                Tip          When you import to the File System option, Integration Services stores the package file in a known location on the server (in the \Microsoft SQL Server\90\DTS\Packages folder). You can then access the package without having to know the specific file location.
+Import to MSDB
+1.            Right-click MSDB and repeat the preceding steps to import the same package to the MSDB system database but, this time, choose SQL Server For Package Location in the Import Package dialog box.
+                Note      If the package is already deployed, you will be prompted to overwrite it. Answer Yes if prompted.
+2.            Complete the steps and note the new package listed on the tree.
+Export a Deployed Package
+1.            Find the ImportCustomers package in the SSMS Object Explorer under Stored Packages\MSDB.
+2.            Right-click the package icon and choose Export Package.
+3.            In the Export Package dialog box, select File System for Package Location.
+4.            Click the Package Path ellipsis button.
+5.            In the Save Package To File dialog box, select Desktop and leave all other defaults to save the package, using the default file name ImportCustomer.dtsx.
+6.            Click Save to save the package file, and then click OK to save and close the Export Package dialog box.
+Execute the File System Package
+1.            View the computer's desktop and locate the   ImportCustomers.dtsx file.
+2.            Double-click the file to open Execute Package Utility.
+3.            Execute the package and view the execution progress. Depending on the speed of your computer, this might take only a few seconds or several minutes to complete. When completed, close the Package Execution Progress dialog box, and then close the Execute Package Utility dialog box.
+Monitor Running Packages
+1.            Repeat the preceding steps with SSMS and Package Execution Utility open in side-by-side windows.
+2.            Start the package, and then open the Running Packages folder. If necessary, right-click and choose refresh to see the name of the running package.
+                Note      The speed of your computer will determine how long this package runs. If the package finishes running before you have a chance to complete the preceding steps, you can extend the running time by creating duplicate copies of the input data files in the project's \Data subfolder. In Windows Explorer, select all of the data files; use the right-click menu to copy and paste options to create duplicate files. Repeat this step if necessary. There is no need to change the default file names.
+3.            Click the package name on the tree to view the summary page for the package.
+4.            Click the Report button on the Summary page toolbar.
+                Note      Selecting the Report option in this view runs a Reporting Services report with summary and detail information about the current package execution.
+                Note      Keep in mind that SSMS shows only the currently running packages. Some packages can complete in less than a second, and you might not be able to monitor these packages.
+6.            Close the Execute Package Utility dialog box when completed
+Setting the Protection Level of Packages
+Defining Sensitive Information
+In an Integration Services package, the following information is defined as sensitive:
+•             The password part of a connection string. However, if you select an option that encrypts everything, the whole connection string will be considered sensitive.
+•             The task-generated XML nodes that are tagged as sensitive. The tagging of XML nodes is controlled by Integration Services and cannot by changed by users.
+•             Any variable that is marked as sensitive. The marking of variables is controlled by Integration Services.
+Whether Integration Services considers a property sensitive depends on whether the developer of the Integration Services component, such as a connection manager or task, has designated the property as sensitive. Users cannot add properties to, nor can they remove properties from, the list of properties that are considered sensitive.
+ Using Encryption
+________________________________________
+
+Encryption, as used by package protection levels, is performed by using the Microsoft Data Protection API (DPAPI), which is part of the Cryptography API (CryptoAPI).
+The package protection levels that encrypt packages by using passwords require that you provide a password also. If you change the protection level from a level that does not use a password to one that does, you will be prompted for a password.
+Also, for the protection levels that use a password, Integration Services uses the Triple DES cipher algorithm with a key length of 192 bits, available in the .NET Framework Class Library (FCL).
+
+Protection Levels
+1. Do not save sensitive (DontSaveSensitive)
+  
+Suppresses the values of sensitive properties in the package when the package is saved. This protection level does not encrypt, but instead it prevents properties that are marked sensitive from being saved with the package and therefore makes the sensitive data unavailable to other users. If a different user opens the package, the sensitive information is replaced with blanks and the user must provide the sensitive information.
+
+When used with the dtutil utility (dtutil.exe), this protection level corresponds to the value of 0.
+
+2. Encrypt all with password (EncryptAllWithPassword)   
+Uses a password to encrypt the whole package. The package is encrypted by using a password that the user supplies when the package is created or exported. To open the package in SSIS Designer or run the package by using the dtexec command prompt utility, the user must provide the package password. Without the password the user cannot access or run the package.
+
+When used with the dtutil utility, this protection level corresponds to the value of 3.
+
+3. Encrypt all with user key (EncryptAllWithUserKey)    
+Uses a key that is based on the current user profile to encrypt the whole package. Only the user who created or exported the package can open the package in SSIS Designer or run the package by using the dtexec command prompt utility.
+
+When used with the dtutil utility, this protection level corresponds to the value of 4.
+Note
+For protection levels that use a user key, Integration Services uses DPAPI standards. For more information about DPAPI, see the MSDN Library at http://msdn.microsoft.com/library.
+4. Encrypt sensitive with password (EncryptSensitiveWithPassword)   
+Uses a password to encrypt only the values of sensitive properties in the package. DPAPI is used for this encryption. Sensitive data is saved as a part of the package, but that data is encrypted by using a password that the current user supplies when the package is created or exported. To open the package in SSIS Designer, the user must provide the package password. If the password is not provided, the package opens without the sensitive data and the current user must provide new values for sensitive data. If the user tries to execute the package without providing the password, package execution fails. For more information about passwords and command line execution, see dtexec Utility (SSIS Tool).
+
+When used with the dtutil utility, this protection level corresponds to the value of 2.
+
+5. Encrypt sensitive with user key (EncryptSensitiveWithUserKey)   
+Uses a key that is based on the current user profile to encrypt only the values of sensitive properties in the package. Only the same user who uses the same profile can load the package. If a different user opens the package, the sensitive information is replaced with blanks and the current user must provide new values for the sensitive data. If the user attempts to execute the package, package execution fails. DPAPI is used for this encryption.
+
+When used with the dtutil utility, this protection level corresponds to the value of 1.
+Note For protection levels that use a user key, Integration Services uses DPAPI standards. For more information about DPAPI, see the MSDN Library at http://msdn.microsoft.com/library.
+
+6. Rely on server storage for encryption (ServerStorage)   
+Protects the whole package using SQL Server database roles. This option is supported only when a package is saved to the SQL Server msdb database. It is not supported when a package is saved to the file system from Business Intelligence Development Studio.
+you change the protection level as listed in the following steps:
+   1. During development, leave the protection level of packages set to the default value, EncryptSensitiveWithUserKey. This setting helps ensure that only the developer sees sensitive values in the package. Or, you can consider using EncryptAllWithUserKey, or DontSaveSensitive.
+   2. When it is time to deploy the packages, you have to change the protection level to one that does not depend on the developer's user key. Therefore you typically have to select EncryptSensitiveWithPassword, or EncryptAllWithPassword. Encrypt the packages by assigning a temporary strong password that is also known to the operations team in the production environment.
+   3. After the packages have been deployed to the production environment, the operations team can re-encrypt the deployed packages by assigning a strong password that is known only to them. Or, they can encrypt the deployed packages by selecting EncryptSensitiveWithUserKey or EncryptAllWithUserKey, and using the local credentials of the account that will run the packages.
+
+24.   What is role as a SSIS Dev?
+I need to develop ssis packages according to business rules and requirements.
+in our company every thing we will do like creating the packages and configuring with config file..we are using configuration because its one time change in config will effect entire package.in production server connection string varies uploading into the server through accurev...
+25.   tell me one critical situation u have faced when ur working with SSIS Packages?
+
+a) sometimes I cannot upload the excel content to database table due to filed type mismatch
+
+solution: conversion the data type transformation I have used....
+
+b) sometimes I cannot upload the excel contect to database table due to some columns are getting null values so I have used script function to eliminate invalid data
+
+c) configuration issues like I have 10 database.. so when ever database server changes I need to go each and every packages and change the server configuration so it’s difficult I have used configuration this is one time only....
+26. What is the critical situation faced when you are doing SSIS packages?
+
+27.   I have one package and that package is already scheduled is it possible to apply the transaction for that package?
+
+28.   I developed one package how to know the whether the package having data or not?
+
+29.   In my sql server one package is  there how to move  that package into some her server?
+
+30.   I have one package that package scheduled by daily 6 am but the job is failed at Saturday  then what I need to do?(where we go how to resolve)
+
+31.   How to schedule a package (Role of Sql Server Agent)
+
+32.   Why we are using xml file configuration file?
+
+33.   I have one package that package scheduled by daily 6 am but the job is failed at Saturday  then what I need to do?(where we go how to resolve)
+
+34.   What is the difference between file system and sql server ( at the time of deployment)?
+
+35.   How do you do dynamic path updations while deploying the package in production enverlment?
+
+36.   How to provide security for the configuration file (xml package configuration file)?
+
+37.   I created one package with some file. I have diff servers having that package with diff configuration file. Is possible to execute that package in servers simultaneously?
+
+38.   How to deploy packages from one server to another server
+
+39.   I have table like this
+Sno        Sname
+1,2          Sreenivas
+3,4          Reddy
+5,6          Raja
+7,8          Reddy
+I want like the following table
+Sno        Sname
+1              Sreenivas
+2              Sreenivas
+3              Reddy
+4              Reddy
+5              Raja
+6              Raja
+7                              Reddy
+8              reddy
+ in source table data having like this
+Eno        Ename  Esloc      Deptno
+1              Sreenu Hyd        10,20,30,40,50
+
+I want like this
+Eno        Ename  Esloc      Deptno
+1              Sreenu Hyd        10
+1              Sreenu Hyd        20
+1              Sreenu Hyd        30
+1              Sreenu Hyd        40
+1              Sreenu Hyd        50
+How to do this?
+
+In ssis package I created a data ware house by using slowly change dimension.
+Cname  Cadd      Status
+Sreenu Bangalore            True
+Sreenu Hyderabad          False
+Sreenu Kadapa False
+Sreenu Badvel  False
+Sreenu Pml        false
+From the above how to know second row?
+Source:
+Ename  EmpNo
+Ename  EmpNo
+Stev       100
+Methew              100
+John      101
+Tom       101
+
+Target:
+Ename  EmpNo
+2.            send Unique (Distinct) records into One target and duplicates into another tatget?
+Source:
+Ename  EmpNo
+Stev       100
+Stev       100
+John      101
+Mathew               102
+
+Output:
+Target_1:
+Ename  EmpNo
+Stev       100
+John      101
+Mathew               102
+
+Target_2:
+Ename  EmpNo
+Stev       100
+
+40.   We have a target source table containing 3 columns :
+Col1, Col2 and Col3. There is only 1 row in the table as follows:
+
+Col1Col2Col3
+-----------------
+ a      b      c
+There is target table containg only 1 column Col. Design a mapping so that the target table contains 3 rows as follows:
+
+Col
+-----
+a
+b
+c
+3.            I have table like this
+Sno        Sname
+1,2          Sreenivas
+3,4          Reddy
+5,6          Raja
+7,8          Reddy
+I want like the following table
+Sno        Sname
+1              Sreenivas
+2              Sreenivas
+3                              Reddy
+4              Reddy
+5              Raja
+6              Raja
+7                              Reddy
+8              reddy
+41.   What type errors occurred commonly in your project and what are those names?
+
+Source:
+Ename  EmpNo
+Stev       100
+Stev       100
+john       101
+Mathew               102
+
+Output:
+Target_1:
+Ename  EmpNo
+Stev       100
+John      101
+Mathew               102
+
+Target_2:
+Ename  EmpNo
+Stev       100
+
+There is a source table that contains duplicate rows.Design a mapping to load all the unique rows in 1 target while all the duplicate rows (only 1 occurence) in another target.
+There is a source table containing 2 columns Col1 and Col2 with data as follows:
+
+Col1   Col2
+ a          l
+ b         p
+ a         m
+ a         n
+ b         q
+ x          y
+
+Design a mapping to load a target table with following values from the above mentioned source:
+Col1    Col2
+  a        l,m,n
+  b       p,q
+  x        y
+
+42.   suppose I have one folder with 5 file text files by using for each file enumerator we store the files in to one folder but suddenly tomorrow one file add to that folder how to store the file into same destination?
+
+43.   Suppose I have one destination table with some data suddenly 2 excel files data want to insert into the destination table but how to know this data is already inserted into the destination and only new data is inserted into the destination?
+
+44.   Tell me one complex packages in your project?(which task mostly we are used)
+
+45.   T1-7 rows and T2-3 rows find out missing rows from table T1
+
+46.   Explain the dynamic behavior of your project?
+
+
+47.   How to access and execute the packages clients?
